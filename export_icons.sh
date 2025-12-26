@@ -1,16 +1,34 @@
 #!/usr/bin/env bash
-
-
-# Exports a given SVG icon into mutiple PNG icons scaled to match: 16x 32x 64x 128x 256x 512x 1024x
-# Usage: ./export_icons.sh {filename.svg} 
+# =====================================================
+# export-icons.sh
+#
+# Description:
+#   Exports an SVG file into multiple PNG sizes, scaling
+#   by height while keeping aspect ratio.
+#   Output folder is named {input_file_name}_scaled.
+#
+# Usage:
+#   ./export-icons.sh input.svg
+#
+# Requirements:
+#   - Inkscape must be installed and available in PATH.
+#
+# Output:
+#   For input "my-icon.svg", creates:
+#     my-icon_scaled/
+#       my-icon-16px.png
+#       my-icon-32px.png
+#       my-icon-64px.png
+#       ...
+#       my-icon-1024px.png
+# =====================================================
 
 set -e
 
 INPUT_SVG="$1"
-OUTPUT_DIR="${2:-icons}"
 
 if [ -z "$INPUT_SVG" ]; then
-  echo "Usage: $0 input.svg [output_dir]"
+  echo "Usage: $0 input.svg"
   exit 1
 fi
 
@@ -19,19 +37,21 @@ if [ ! -f "$INPUT_SVG" ]; then
   exit 1
 fi
 
-mkdir -p "$OUTPUT_DIR"
-
 # Get filename without path and extension
 BASENAME="$(basename "$INPUT_SVG" .svg)"
 
-SIZES=(16 32 64 128 256 512 1024)
+# Output directory based on input filename
+OUTPUT_DIR="${BASENAME}_scaled"
+mkdir -p "$OUTPUT_DIR"
 
-for SIZE in "${SIZES[@]}"; do
+# Heights to export
+HEIGHTS=(16 32 64 128 256 512 1024)
+
+for H in "${HEIGHTS[@]}"; do
   inkscape "$INPUT_SVG" \
     --export-type=png \
-    --export-filename="$OUTPUT_DIR/${BASENAME}-${SIZE}x${SIZE}.png" \
-    --export-width="$SIZE" \
-    --export-height="$SIZE"
+    --export-filename="$OUTPUT_DIR/${BASENAME}-${H}px.png" \
+    --export-height="$H"
 done
 
 echo "Export complete → $OUTPUT_DIR"
