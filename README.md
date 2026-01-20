@@ -2,6 +2,11 @@
 
 This repository contains the official **Spectrum** logo assets. This exists as a centralized, version-controlled source of truth for all Spectrum branding assets.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/SpectrumPro/logos/refs/heads/main/design/guide-dark.png" height="335">
+  <img src="https://raw.githubusercontent.com/SpectrumPro/logos/refs/heads/main/design/palette-dark.png" height="335">
+</p>
+
 ## What’s Included
 
 - Master logo designs in **SVG** format  
@@ -12,4 +17,4 @@ This repository contains the official **Spectrum** logo assets. This exists as a
 
 ---
 
-Copyright © 2025 [Liam Sherwin](https://liamsherwin.com).
+Copyright © 2026 [Liam Sherwin](https://liamsherwin.com).
